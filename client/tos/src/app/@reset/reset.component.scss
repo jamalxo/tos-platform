@@ -1,0 +1,18 @@
+.leftOuterDiv{max-width: 50%; width:50%; float:left; margin: 0; height: 100%;}
+.leftInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.rightOuterDiv{background-color: #24364C; max-width: 50%; width:50%; float:right; height: 100%;}
+.rightInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.CoText{color:#55B79E;}
+.nnotateText{color:#24364C;}
+.infoText{color:#24364C; width: 50%; justify-content: space-between; margin: 0 auto;}
+.signupHeading{color: #FFFFFF; margin-bottom: 1em;}
+.nameDiv{width: 70%; display: flex; justify-content: space-between; margin: 0 auto; float: none;}
+.firstnameInput{margin-right: 2%; margin-bottom: 1em; float: none; background-color: #24364C; color: #FFFFFF}
+.lastnameInput{margin-left: 2%; margin-bottom: 1em; float: none; background-color: #24364C; color: #FFFFFF}
+.emailInput{width: 70%; margin: 0 auto; float: none; background-color: #24364C; color: #FFFFFF}
+.passwordDiv{width: 70%; display: flex; justify-content: space-between; margin: 0 auto; float: none;}
+.passwordInput{margin-right: 2%; margin-bottom: 1em; float: none; background-color: #24364C; color: #FFFFFF}
+.passwordconfirmInput{margin-left: 2%; margin-bottom: 1em; float: none; background-color: #24364C; color: #FFFFFF}
+.loginButton{width: 50%; color:#FFFFFF; background-color: #50B89D}
+.alreadyregisteredText{color:#FFFFFF;}
+.signinText{color:#FFFFFF; text-decoration: underline;}

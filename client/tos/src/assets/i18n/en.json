@@ -1,0 +1,81 @@
+{
+  "overview": {
+    "home": "Home",
+    "recent": "Recent"
+  },
+  "shared": {
+    "title": "nnotate",
+    "home": "Home",
+    "editor": "Editor",
+    "about": "About us",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "myTasks": "My Tasks",
+    "myDocuments": "My Documents",
+    "tasks": "All Tasks",
+    "documents": "All Documents",
+    "upload": "Upload Document",
+    "logout": "Logout"
+  },
+  "landing-page": {
+    "logIn": "Log in",
+    "register": "Register",
+    "signUp": "Sign up!",
+    "signIn": "Sign in",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm",
+    "infoText": "Our mission is to create a tool that allows you as lawyers to work together on a single doument and annotate it.",
+    "welcomeBack": "Welcome back!",
+    "logInInfo": "To log in please enter your email and password",
+    "notamember": "Not a member?",
+    "passwordForgotten": "Password forgotten?",
+    "recover": "Enter your Mail & Recover",
+    "alreadyRegistered": "Already registered?",
+    "createAccount": "Create account",
+    "firstNameError": "First name must not be empty",
+    "lastNameError": "Last name must not be empty",
+    "emailError": "Please enter a valid email",
+    "passwordError": "Password must not be empty"
+  },
+  "reset": {
+    "passwordReset": "Password reset",
+    "passwordResetInfo": "Enter a new password and confirm it",
+    "passwordResetButton": "Reset password",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+  },
+  "upload": {
+    "upload": "Upload",
+    "title": "Title",
+    "content": "Content"
+  },
+  "profile": {
+    "deleteAccount": "Delete account",
+    "profile": "Profile",
+    "general": "General",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "additionalInformation": "Additional information",
+    "location": "Location",
+    "company": "Company",
+    "saveChanges": "Save changes",
+    "firstNameIsEmpty": "First name must not be empty",
+    "lastNameIsEmpty": "Last name must not be empty",
+    "emailInvalid": "You did not enter a valid email address"
+  },
+  "editor": {
+    "createSection": "Create Section",
+    "create": "Create"
+  },
+  "about-us": {
+    "collaboration": "Collaboration",
+    "ourMission": "Our mission",
+    "text1": "We are a team of four who developed this webapp for lawyers to collaborate with each other. Our mission is to create a tool that allows you as lawyers to collaborate and comment on a single document.",
+    "text2": "We would also like to credit the icons we used on our website to flaticon and icos8."
+  }
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Task</h1>
+<mat-dialog-content>Are you sure you want to delete this task?</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button cdkFocusInitial (click)="deleteTask()">
+    Delete
+  </button>
+</mat-dialog-actions>

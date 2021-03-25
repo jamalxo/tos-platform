@@ -1,0 +1,12 @@
+<tos-header></tos-header>
+<mat-sidenav-container class="example-container" >
+  <mat-sidenav mode = "side" opened class="sidenav-container" *ngIf="userService.loggedIn">
+      <div fxLayout="column">
+        <img class="icon" src="/assets/icons/all_documents.png" title="All Documents" (click)="goToDocuments()">
+        <img class="icon" src="/assets/icons/all_tasks.png" title="All Tasks" (click)="goToTasks()">
+      </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

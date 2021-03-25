@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h1> {{ 'overview.home' | translate }}</h1>
+  <mat-divider></mat-divider>
+
+  <section>
+    <h2 id="recent"> {{ 'overview.recent' | translate }} </h2>
+    <div class="row" id = "recent-swimlane">
+      <h3 id="recent-sub">No recent documents</h3>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="my-documents">{{ 'shared.myDocuments' | translate }}
+      <button mat-raised-button (click)="goToUpload()">
+        <img src="/assets/icons/import.png" width="15" height="15">
+        {{ 'shared.upload' | translate }}
+      </button>
+    </h2>
+    <routing-card></routing-card>
+    <button mat-button id="showAllBtn" (click)="goToDocuments()">Show All</button>
+  </section>
+
+  <section>
+    <h2 id="my-tasks">{{ 'shared.myTasks' | translate }}</h2>
+    <task-table></task-table>
+  </section>
+</div>

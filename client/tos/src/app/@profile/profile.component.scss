@@ -1,0 +1,28 @@
+.outerDiv{width: 80%; height: 90%; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+/* Left side */
+.leftIntermediateDiv{width:calc(100%/3); height: 100%; float:left; margin: 0; background-color: #132841; border-top-left-radius: 5%; border-bottom-left-radius: 5%;}
+.leftInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.leftSideProfileInformation{color: #FFFFFF; text-align: center}
+.locationDiv{margin-top: 0;}
+.leftSideHr{background-color: #FFFFFF; width:calc(2*(100%/3)); margin-top: 25%;}
+.deleteAccountButton{background-color: #FF0000; width:40%}
+/* Right side */
+.rightIntermediateDiv{width:calc(2*(100%/3)); height: 100%; float:right; margin: 0; background-color: #F4F5F7; border-top-right-radius: 5%; border-bottom-right-radius: 5%;}
+.rightInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.profileHeaderDiv{margin-bottom: 0}
+.editIcon{display: inline-block; max-width: 3.5%; height: auto; position: relative; left: 80%;}
+.informationDiv{position: relative; left: 10%; margin-bottom: 1em;}
+.informationLabel{display: inline-block; width: 20%; text-align: left; color: #132841;}
+.informationInput{width: calc(100%/3); display: inline-block;}
+.profileHeader{display: inline-block; position: relative; left: 5%; color: #132841; font-weight: bold;}
+.generalDiv{margin-bottom: 0;}
+.generalHeader{display: inline-block; position: relative; left: 10%; color: #132841; font-weight: bold;}
+.additionalInformationDiv{margin-bottom: 0; margin-top: 0;}
+.additionalInformationHeader{display: inline-block; position: relative; left: 10%; color: #132841; font-weight: bold;}
+.rightSideHr1{width: 90%; display: inline-block; position: relative; left: 5%;  margin-top: 0; margin-bottom: 0;}
+.rightSideElement2{display: inline-block; position: relative; left: 10%; width: calc(160%/3); margin-top: 0;}
+.saveChangesButton{display: inline-block; width: 20%; height: auto; position: relative; left: 75%; background-color: #132841; color: #FFFFFF; margin-top: 0;}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: rgb(232, 240, 254) !important;
+    border-radius: 5px;
+  }

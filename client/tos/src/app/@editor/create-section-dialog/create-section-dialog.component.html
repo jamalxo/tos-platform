@@ -1,0 +1,87 @@
+<ng-container *ngIf="user$ | async as user">
+  <h2 mat-dialog-title>Create Section</h2>
+  <mat-divider></mat-divider>
+  <mat-dialog-content class="mat-typography">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Verify Section</ng-template>
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Section</mat-label>
+            <textarea matInput disabled> {{ createSectionDialogData.section.content }}</textarea>
+          </mat-form-field>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Choose Annotation</ng-template>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col">
+              <mat-card class="annotation-card" (click)="chooseAnnotation(true)">
+                <mat-card-content class="annotation-card-content">
+                  <mat-icon class="annotation-card-icon">topic</mat-icon>
+                  <h2>Create Topic Label</h2>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col">
+              <mat-card class="annotation-card" (click)="chooseAnnotation(false)">
+                <mat-card-content class="annotation-card-content">
+                  <mat-icon class="annotation-card-icon">policy</mat-icon>
+                  <h2>Create Legal Assessment</h2>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step [formGroup]="sectionForm">
+        <ng-template matStepLabel>Change Details</ng-template>
+        <div *ngIf="isTopicLabel">
+          <h2>Topic Label Details</h2>
+          <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <h3 fxFlex="30" class="form-field-label">Label</h3>
+            <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+              <mat-label>Topic</mat-label>
+              <input matInput formControlName="topic" placeholder="e.g Privacy"/>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <h3 fxFlex="30" class="form-field-label">Reviewer</h3>
+            <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+              <input matInput disabled [value]="getUserName(user)">
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="!isTopicLabel">
+          <h2>Legal Assessment Details</h2>
+          <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <h3 fxFlex="30" class="form-field-label">Legality</h3>
+            <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+              <mat-label>Legal Assessment</mat-label>
+              <mat-select formControlName="legal">
+                <mat-option [value]="true">Legal</mat-option>
+                <mat-option [value]="false">Illegal</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-evenly center">
+            <h3 fxFlex="30" class="form-field-label">Reviewer</h3>
+            <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+              <input matInput disabled [value]="getUserName(user)">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button *ngIf="stepper.selectedIndex !== 2" mat-button (click)="next()">Next</button>
+    <button *ngIf="stepper.selectedIndex === 2" mat-button (click)="createSection()"
+            [disabled]="!hasNoError()">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</ng-container>

@@ -1,0 +1,20 @@
+.leftOuterDiv{max-width: 50%; width:50%; float:left; margin: 0; height: 100%; background-color: #FFFFFF;}
+.leftInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.rightOuterDiv{background-color: #24364C; max-width: 50%; width:50%; float:right; height: 100%;}
+.rightInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.CoText{color:#55B79E;}
+.nnotateText{color:#24364C;}
+.infoText{color:#24364C; width: 50%; justify-content: space-between; margin: 0 auto;}
+.signupHeading{color: #FFFFFF; margin-bottom: 1em;}
+.nameDiv{width: 70%; display: flex; justify-content: space-between; margin: 0 auto; float: none;}
+.seperatedFieldLeft{width: 33%; margin-right: 2%}
+.seperatedFieldRight{width: 33%; margin-left: 2%}
+.emailField{width: 70%}
+.passwordDiv{width: 70%; display: flex; justify-content: space-between; margin: 0 auto; float: none;}
+.loginButton{width: 50%; color:#FFFFFF; background-color: #50B89D}
+.alreadyregisteredText{color:#FFFFFF;}
+.signinText{color:#FFFFFF; text-decoration: underline;}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: rgb(232, 240, 254) !important;
+  border-radius: 5px;
+}

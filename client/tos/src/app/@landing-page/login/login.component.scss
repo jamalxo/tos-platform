@@ -1,0 +1,45 @@
+.leftOuterDiv{max-width: 50%; width:50%; float:left; margin: 0; height: 100%; background-color: #FFFFFF;}
+.leftInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.rightOuterDiv{background-color: #24364C; max-width: 50%; width:50%; float:right; height: 100%;}
+.rightInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.CoText{color:#55B79E;}
+.nnotateText{color:#24364C;}
+.loginImage{width:100%}
+.welcomebackHeader{color: #FFFFFF}
+.logininfoText{color: #FFFFFF}
+.matField{width: 70%}
+.emailInput{width: 70%; margin: 0 auto; float: none; background-color: #24364C; color: #FFFFFF}
+.passwordInput{width: 70%; margin: 0 auto; float: none; background-color: #24364C; color: #FFFFFF}
+.loginButton{width: 50%; color:#FFFFFF; background-color: #50B89D}
+.notamemberText{color:#FFFFFF;}
+.registerText{color:#FFFFFF; text-decoration: underline;}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: rgb(232, 240, 254) !important;
+  border-radius: 5px;
+}
+
+.login__text__actions {
+  color:#FFFFFF;
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+}
+
+.login__text__actions p > a {
+  text-decoration: underline;
+  color:#FFFFFF;
+}
+
+.login__text__actions span {
+  font-size: 20px;
+}
+
+.login__password__recover {
+  cursor: pointer;
+}
+
+.login__password__message {
+  color:#FFFFFF;
+  padding: 25px;
+}

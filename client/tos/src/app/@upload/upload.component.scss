@@ -1,0 +1,106 @@
+.copy-paste-wrapper {
+  z-index: 2;
+  min-width: 400px;
+  min-height: 250px;
+}
+
+.upload-wrapper {
+  background-color: var(--primary-grey);
+  min-width: 400px;
+  min-height: 250px;
+}
+
+.fullsize-upload-wrapper {
+  // width: 100%;
+}
+
+.upload-mat-card-title {
+  font-size: 50px;
+  text-align: center;
+  padding-bottom: 26px;
+}
+
+.upload-mat-card-subtitle {
+  font-size: 20px;
+  text-align: center;
+}
+
+.upload-container {
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  label {
+    text-decoration: underline;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #38424c;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+.upload-folder-icon {
+  height: 100px;
+  width: 100px;
+}
+
+.file-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.copy-paste-wrapper {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--primary-grey);
+}
+
+.copy-paste-text {
+  p {
+    color: #38424c;
+    font-size: 20px;
+    font-weight: 400;
+    vertical-align: middle;
+  }
+
+  label {
+    text-decoration: underline;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.copy-paste-closer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-group {
+  text-align: start;
+
+  label {
+    font-size: 30px;
+  }
+}

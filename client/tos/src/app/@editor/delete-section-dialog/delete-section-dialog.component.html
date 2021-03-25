@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Delete Section</h1>
+<mat-dialog-content>Are you sure you want to delete this section?</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button cdkFocusInitial
+          (click)="deleteSection()">
+    Delete
+  </button>
+</mat-dialog-actions>

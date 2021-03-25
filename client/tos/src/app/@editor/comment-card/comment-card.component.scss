@@ -1,0 +1,36 @@
+.annotation-card {
+  background-color: var(--secondary-separator-grey);
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+.title {
+  display: flex;
+}
+
+.card-container {
+  margin: 10px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px var(--color-grey-400);
+}
+
+.icon {
+  padding-top: 1px;
+  color: var(--color-gray-quartiary);
+  font-size: 20px;
+}
+
+.dot {
+  color: var(--color-gray-quartiary);
+  font-size: 7px;
+}
+
+.hover {
+  cursor: pointer;
+}
+
+.highlight {
+  color: var(--color-highlight);
+}

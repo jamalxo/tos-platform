@@ -1,0 +1,58 @@
+.container {
+    position: absolute;
+    padding-left: 30px;
+}
+
+h1 {
+    color: var(--secondary-blue);
+    font-weight: normal;
+    font-size: 45px;
+}
+
+h2 {
+    color: var(--secondary-blue);
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 48px;
+    padding-top: 10px;
+}
+
+h3 {
+    position: relative;
+    color: darkgrey;
+    text-align: center;
+    padding-top: 100px;
+    padding-left: 620px;
+}
+
+button {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+    font-weight: normal;
+    border-radius:10px;
+    bottom: 3px;
+}
+
+#recent-swimlane {
+    position: relative;
+    background-color: var(--primary-grey);
+    border: 1px solid var(--primary-grey);
+    left: 13px;
+    border-radius: 15px;   
+    min-width: 130%;
+    height: 220px;
+}
+
+#showAllBtn {
+    bottom: 27px;
+    left: 1320px;
+    height: 25px;
+    font-weight: normal;
+    font-size: 10px;
+    text-decoration-line: underline;
+    color: var(--secondary-blue);
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+   

@@ -1,0 +1,105 @@
+<div class="list-container container-fluid mt-5 pl-5 pr-5 pb-5">
+  <div class="list-header">
+    <button mat-flat-button
+            class="list-title-button"
+    >
+      Task List
+    </button>
+  </div>
+  <div class="list-filters">
+    <div class="list-filter-button-list">
+      <button mat-flat-button
+              class="list-filter-title-button"
+      >
+        FILTERS
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('all'), 'list-filter-button']"
+              (click)="resetFilter()"
+      >
+        All
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('assignedToMe'), 'list-filter-button']"
+              (click)="filterByAssignedToMe()">
+        Assigned to me
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('assignedByMe'), 'list-filter-button']"
+              (click)="filterByAssignedByMe()">
+        Assigned by me
+      </button>
+    </div>
+    <div class="list-filter-input-field">
+      <mat-form-field class="list-filter-input" appearance="outline">
+        <input
+          matInput
+          (keyup)="filter($any($event.target).value)"
+          placeholder="Search"
+        >
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 list-table">
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type</th>
+      <td mat-cell *matCellDef="let element"> {{element.taskType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="task_id">
+      <th mat-header-cell *matHeaderCellDef> ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.task_id | taskId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="document">
+      <th mat-header-cell *matHeaderCellDef> Document</th>
+      <td mat-cell *matCellDef="let element"> {{element.documentId.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="taskStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+      <td mat-cell *matCellDef="let element">
+        <status-label
+          [status]="element.taskStatus">
+        </status-label>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignee">
+      <th mat-header-cell *matHeaderCellDef> Assignee</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab disabled aria-label="person icon">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="person icon"
+            [matTooltip]=element.assigneeId.firstName
+          >
+            person
+          </mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="list__actions">
+          <mat-icon
+            (click)="openDocument(element)"
+          >
+            launch
+          </mat-icon>
+          <mat-icon
+            (click)="deleteTask(element)"
+          >
+            delete
+          </mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

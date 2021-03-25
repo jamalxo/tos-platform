@@ -1,0 +1,26 @@
+.status-chip {
+  cursor: unset;
+  height: 25px;
+  color: var(--white);
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.open {
+  background-color: var(--open-badge-color);
+}
+.in-progress {
+  background-color: var(--in-progress-badge-color);
+}
+.review {
+  background-color: var(--review-badge-color);
+}
+.done {
+  background-color: var(--done-badge-color);
+}
+
+h5 {
+  position: relative;
+  top: 3px;
+  height: 10px;
+}

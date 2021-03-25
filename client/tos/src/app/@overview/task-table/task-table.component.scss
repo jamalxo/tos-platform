@@ -1,0 +1,41 @@
+.table-responsive{
+    max-width: 90%;
+    max-height: 220px;
+    overflow: auto;
+    border-radius: 15px;
+    border: 1px solid var(--secondary-grey);
+}
+
+table {
+    background: var(--primary-grey);
+    font-size: 14px;
+    width: 100%;
+}
+
+#noTasks {
+    background-color: var(--primary-grey);
+    border: 1px solid var(--secondary-grey);
+    border-radius: 15px;    
+    width: 90%;
+    height: 200px;
+}
+
+h3 {
+    text-align: center;
+    padding-top: 90px;
+    color: darkgrey;
+}
+
+th {
+    font-size: 14px;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.icon_2 {
+    margin-left: 15px;
+}

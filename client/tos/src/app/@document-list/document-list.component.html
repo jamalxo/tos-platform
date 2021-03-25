@@ -1,0 +1,129 @@
+<div class="list-container container-fluid mt-5 pl-5 pr-5 pb-5">
+  <div class="list-header">
+    <button mat-flat-button
+            class="list-title-button"
+    >
+      Document List
+    </button>
+    <button
+      mat-flat-button
+      class="document-list-upload-button"
+      (click)="uploadReroute()"
+    >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="upload icon"
+      >
+        upload
+      </mat-icon>
+      Import Document
+    </button>
+  </div>
+  <div class="list-filters">
+    <div class="list-filter-button-list">
+      <button mat-flat-button
+              class="list-filter-title-button"
+      >
+        FILTERS
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('all'), 'list-filter-button']"
+              (click)="resetFilter()"
+      >
+        All
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('uploadedByMe'), 'list-filter-button']"
+              (click)="filterByUploadedByMe()">
+        Uploaded by me
+      </button>
+      <button mat-flat-button color="primary"
+              [ngClass]="[filterButtonStyle('annotatedByMe'), 'list-filter-button']"
+              (click)="filterByAnnotatedByMe()"
+      >
+        Annotated by me
+      </button>
+    </div>
+    <div class="list-filter-input-field">
+      <mat-form-field class="list-filter-input" appearance="outline">
+        <input
+          matInput
+          (keyup)="filter($any($event.target).value)"
+          placeholder="Search"
+        >
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 list-table">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title</th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+      <td mat-cell *matCellDef="let element">
+        <status-label
+          [status]="element.status">
+        </status-label>
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="annotations">
+      <th mat-header-cell *matHeaderCellDef> Annotations</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip>
+            {{element.annotations.length || 0}}
+          </mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="uploader">
+      <th mat-header-cell *matHeaderCellDef> Uploader</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab disabled aria-label="person icon" class="uploader-icon">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="person icon"
+            [matTooltip]=element.uploadedBy.firstName
+          >
+            person
+          </mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="list__actions">
+          <mat-icon
+            (click)="openDocument(element)"
+          >
+            launch
+          </mat-icon>
+          <mat-icon
+            (click)="deleteDocument(element)"
+          >
+            delete
+          </mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

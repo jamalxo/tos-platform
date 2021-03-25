@@ -1,0 +1,47 @@
+stages:
+  - init
+  - build
+  - test
+
+variables:
+  DIST_DIR: dist
+  IMAGE: registry.heroku.com/angular-quality/web
+  CLI_VERSION: 7.3.9
+
+
+before_script:
+  - cd client/tos
+  - "[ -d node_modules ] || npm ci"
+
+init:
+  stage: init
+  image: trion/ng-cli:${CLI_VERSION}
+
+  script: ['']
+  cache:
+    policy: push
+    key: ${CI_COMMIT_SHA}
+    paths: ['angular-quality/node_modules']
+  tags:
+    - docker
+    - gce
+
+test:nglint:
+  stage: test
+  image: trion/ng-cli:${CLI_VERSION}
+  script:
+    - npm run lint
+  tags:
+    - docker
+
+build:
+  stage: build
+  image: trion/ng-cli:${CLI_VERSION}
+  script:
+    - ng build --prod
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+  tags:
+    - docker

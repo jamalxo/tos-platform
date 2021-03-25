@@ -1,0 +1,8 @@
+.outerDiv{width: 80%; height: 80%; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.leftIntermediateDiv{width:calc(2*(100%/3)); height: 100%; float:left; margin: 0;}
+.leftInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.rightIntermediateDiv{width:calc((100%/3)); height: 100%; float:right; margin: 0;}
+.rightInnerDiv{position: relative; top: 50%; transform: translateY(-50%);}
+.leftSideImage{max-width: 90%; height: auto;}
+.primaryColor{color: #132841;}
+.primaryColorBold{color: #132841; font-weight: bold;}

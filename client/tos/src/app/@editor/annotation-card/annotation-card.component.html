@@ -1,0 +1,63 @@
+<div class="card-container">
+  <mat-card *ngIf="topicLabel" class="annotation-card">
+    <h4 class="font-weight-light">
+      {{topicLabel.createdBy.firstName}} {{topicLabel.createdBy.lastName}}
+    </h4>
+    <div class="title">
+      <h3 fxLayout="row" fxLayoutAlign="center">
+        <mat-icon class="ml-1">label_important_outline</mat-icon>
+        {{topicLabel.label}}
+      </h3>
+
+    </div>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <div class="mr-2"> {{amountOfUpvotes()}} </div>
+        <mat-icon class="icon hover" [ngClass]="isUpvotedByMe() ? 'highlight' : ''"
+                  (click)="upvoteOrUndoUpvote()"
+        >thumb_up</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <div class="mr-2"> {{amountOfComments()}} </div>
+        <mat-icon class="icon">comment</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <mat-icon class="icon hover" (click)="openTopicView()">launch</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <mat-icon class="icon hover" (click)="deleteAnnotation(true)">delete</mat-icon>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card *ngIf="legalAssessment" class="annotation-card">
+    <h4 class="font-weight-light">
+      {{legalAssessment.createdBy.firstName}} {{legalAssessment.createdBy.lastName}}
+    </h4>
+    <div class="title">
+      <h3 fxLayout="row" fxLayoutAlign="center">
+        <mat-icon class="ml-1" [ngStyle]="{'color': legalAssessment.legal === true ? 'green' : 'red'}">policy_outline</mat-icon>
+        {{getLegality(legalAssessment.legal)}}
+      </h3>
+    </div>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <div class="mr-2"> {{amountOfUpvotes()}} </div>
+        <mat-icon class="icon hover" [ngClass]="isUpvotedByMe() ? 'highlight' : ''"
+                  (click)="upvoteOrUndoUpvote()"
+        >thumb_up</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <div class="mr-2"> {{amountOfComments()}} </div>
+        <mat-icon class="icon">comment</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <mat-icon class="icon hover" (click)="openLegalView()">launch</mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="25">
+        <mat-icon class="icon hover" (click)="deleteAnnotation(false)">delete</mat-icon>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

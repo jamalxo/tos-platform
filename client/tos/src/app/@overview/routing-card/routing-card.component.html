@@ -1,0 +1,15 @@
+<div id = "swimlane" *ngIf="dataSource.length > 0">
+ <mat-grid-list cols="7" rowHeight="2:1" gutterSize="20px">
+    <mat-grid-tile *ngFor="let document of dataSource.slice(0,14)" (click)="openDocument(document)">
+        <p *ngIf="document.annotations" matBadge="{{document.annotations.length}}" matBadgeSize="medium"></p>
+        <status-label status={{document.status}}></status-label>
+        <h4 *ngIf="document.title">{{ (document.title.length>15)? (document.title | slice:0:15)+'...':(document.title) }}</h4>
+        <h6>Uploaded on {{ formatDate(document.createdAt) }}</h6>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div id = "noDocuments" *ngIf="dataSource.length == 0">
+  <h3> No documents have been uploaded</h3>
+</div>
+

@@ -1,0 +1,43 @@
+<div class="table-responsive" *ngIf="dataSource.data.length > 0">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1 list-table">
+
+      <ng-container matColumnDef="task_id">
+        <th mat-header-cell *matHeaderCellDef> ID</th>
+        <td mat-cell *matCellDef="let element"> T{{element.task_id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type</th>
+        <td mat-cell *matCellDef="let element"> {{element.taskType}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="document">
+        <th mat-header-cell *matHeaderCellDef> Document</th>
+        <td mat-cell *matCellDef="let element"> {{element.documentId.title}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="taskStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+        <td mat-cell *matCellDef="let element">
+          <status-label
+            [status]="element.taskStatus">
+          </status-label>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <img class="icon_1" (click)="openUpdateTask(element.documentId._id, element.sectionId, element)" src="/assets/icons/open_external.png">
+          <img class="icon_2" (click)="openDeleteTaskDialog(element)" src="/assets/icons/trash.png">
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<div id = "noTasks" *ngIf="dataSource.data.length == 0">
+  <h3>You have no tasks</h3>
+</div>

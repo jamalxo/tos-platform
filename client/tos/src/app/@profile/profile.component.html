@@ -1,0 +1,85 @@
+<div class="outerDiv">
+    <div class="leftIntermediateDiv">
+        <div class="leftInnerDiv" *ngIf="currentUser">
+        <div class="text-center">
+          <img style="max-width: 40%; max-height: 40%; border-radius: 50%;" src="https://i.imgur.com/VAdCEfX.png">
+        </div>
+        <div>
+          <h2 class="leftSideProfileInformation">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+        </div>
+        <div>
+          <h3 class="leftSideProfileInformation">{{currentUser.company}}</h3>
+        </div>
+        <div class="locationDiv">
+          <h3 class="leftSideProfileInformation">{{currentUser.location}}</h3>
+        </div>
+        <div>
+          <hr class="leftSideHr"/>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-secondary deleteAccountButton">{{ 'profile.deleteAccount' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="rightIntermediateDiv" [formGroup]="profileForm">
+      <div class="rightInnerDiv">
+        <div class="block profileHeaderDiv">
+          <h1 class="profileHeader">{{ 'profile.profile' | translate }}</h1>
+        </div>
+        <div class="block">
+          <hr class="rightSideHr1"/>
+        </div>
+        <div class="block generalDiv">
+          <h2 class="generalHeader">{{ 'profile.general' | translate }}</h2>
+        </div>
+        <div class="block">
+          <hr class="rightSideElement2"/>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="rightSideElement2" appearance="outline">
+                <mat-label>{{ 'profile.firstName' | translate }}</mat-label>
+                <input matInput formControlName="firstName" required (keyup.enter)="onSubmit()" >
+                <mat-error *ngIf="f.firstName.hasError('required')">{{ 'profile.firstNameIsEmpty' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="rightSideElement2" appearance="outline">
+                <mat-label>{{ 'profile.lastName' | translate }}</mat-label>
+                <input matInput formControlName="lastName" required (keyup.enter)="onSubmit()" >
+                <mat-error *ngIf="f.lastName.hasError('required')">{{ 'profile.lastNameIsEmpty' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="rightSideElement2" appearance="outline">
+                <mat-label>{{ 'profile.emailAddress' | translate }}</mat-label>
+                <input matInput formControlName="email" required (keyup.enter)="onSubmit()" >
+                <mat-error *ngIf="f.email.hasError('email')">{{ 'profile.emailInvalid' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+  
+        <div class="block additionalInformationDiv">
+            <h2 class="additionalInformationHeader">{{ 'profile.additionalInformation' | translate }}</h2>
+        </div>
+        <div class="block">
+            <hr class="rightSideElement2"/>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="rightSideElement2" appearance="outline">
+                <mat-label>{{ 'profile.location' | translate }}</mat-label>
+                <input matInput formControlName="location" (keyup.enter)="onSubmit()" >
+            </mat-form-field>
+        </div>
+        <div fxLayout="column">
+            <mat-form-field class="rightSideElement2" appearance="outline">
+                <mat-label>{{ 'profile.company' | translate }}</mat-label>
+                <input matInput formControlName="company" (keyup.enter)="onSubmit()" >
+            </mat-form-field>
+        </div>
+        <div class="block">
+          <button class="btn btn-secondary saveChangesButton" (click)="onSubmit()">{{ 'profile.saveChanges' | translate }}</button>
+        </div>
+      </div>
+    </div>  
+  </div>
+  

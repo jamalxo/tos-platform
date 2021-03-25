@@ -1,0 +1,31 @@
+<div class="leftOuterDiv">
+  <div class="leftInnerDiv">
+    <h2 class="text-center"><span class="CoText">Co</span><span class="nnotateText">nnotate</span></h2>
+    <p class="text-center infoText">{{ 'landing-page.infoText' | translate }}</p>
+    <img src="https://i.imgur.com/6S4JHbk.png" style= "width:100%;"/>
+  </div>
+</div>
+
+<div class="rightOuterDiv">
+  <div class="rightInnerDiv">
+    <div *ngIf="!showPasswordReset">
+      <h1 class="text-center welcomebackHeader">{{ 'reset.passwordReset' | translate }}</h1>
+      <p class="text-center logininfoText">{{ 'reset.passwordResetInfo' | translate }}</p>
+
+      <form [formGroup]="resetForm" class="is-valid" novalidate>
+        <div class="form-group">
+          <input type="password" class="form-control passwordInput" id="password" placeholder="{{ 'reset.password' | translate }}" formControlName="password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control passwordInput" id="confirmPassword" placeholder="{{ 'reset.confirmPassword' | translate }}" formControlName="confirmPassword" required>
+        </div>
+        <div class="form-group text-center">
+          <button type="button" class="btn btn-primary loginButton" (click)="resetPassword()">{{ 'reset.passwordResetButton' | translate }}</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="showPasswordReset">
+      <h1 class="text-center login__password__message">{{passwordResetMessage}}</h1>
+    </div>
+  </div>
+</div>

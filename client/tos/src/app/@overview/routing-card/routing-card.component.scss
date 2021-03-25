@@ -1,0 +1,65 @@
+#swimlane {
+    background-color: var(--primary-grey);
+    border: 1px solid var(--primary-grey);
+    border-radius: 15px;    
+    min-width: 130%;
+    max-width: 200%;
+    height: 225px;
+}
+
+#noDocuments {
+    background-color: var(--primary-grey);
+    border: 1px solid var(--primary-grey);
+    border-radius: 15px;    
+    min-width: 130%;
+    height: 225px;
+}
+
+h3 {
+    text-align: center;
+    padding-top: 100px;
+    color: darkgrey;
+}
+
+h4 {
+    position: absolute;
+    left: 12px;
+    top: 42px;
+}
+
+h6 {
+    position: absolute;
+    left: 12px;
+    top: 60px;
+}
+
+p {
+    position: relative;
+    padding-left: 180px;
+    padding-bottom: 60px;
+}
+
+mat-grid-list {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+mat-grid-tile {
+    top: 15px;
+    background: var(--secondary-grey);
+    border-radius: 15px;
+    overflow: inherit;
+    cursor: pointer;
+}
+
+status-label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.mat-badge-content {
+    background-color: var(--quartiary-grey);
+    color: var(--white);
+    font-weight: normal;
+}

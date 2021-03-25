@@ -1,0 +1,76 @@
+<ng-container *ngIf="user$ | async as user">
+  <h2 mat-dialog-title>{{cardTitle}}</h2>
+  <p>* Required Fields</p>
+  <mat-divider></mat-divider>
+  <div [formGroup]="taskForm">
+
+    <div *ngIf="context === 'Update'" fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Document</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>Document</mat-label>
+        <input disabled matInput [value]="taskDialogData.document.title"/>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Assignee</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>Assignee</mat-label>
+        <mat-select formControlName="assignee" required>
+          <mat-option *ngFor="let user of allUser$ | async" [value]="user._id">
+            {{user.firstName}} {{user.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Section</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>No Section</mat-label>
+        <mat-select formControlName="section" [disabled]="context === 'Update'">
+          <mat-select-trigger>
+            selected
+          </mat-select-trigger>
+          <mat-option>No Section</mat-option>
+          <mat-option *ngFor="let section of taskDialogData.document.sections" [value]="section._id">
+            <mat-icon [ngStyle]="{'color': intToRGB(hashCode(section._id || ''))}">fiber_manual_record</mat-icon>
+            Section
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="context === 'Update'" fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Status</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="taskStatus" required>
+          <mat-option *ngFor="let status of taskStatusEnumKeys" [value]="status">
+            {{status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Task type</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>Task type</mat-label>
+        <mat-select formControlName="taskType" required [disabled]="context === 'Update'">
+          <mat-option *ngFor="let task of taskTypeEnumKeys" [value]="task">
+            {{task}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <h3 fxFlex="30" class="form-field-label">Description</h3>
+      <mat-form-field fxFlex="70" appearance="outline" style="margin-bottom: -1.25em">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" placeholder="Describe this task"/>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button (click)="persist()">{{context}}</button>
+  </mat-dialog-actions>
+</ng-container>

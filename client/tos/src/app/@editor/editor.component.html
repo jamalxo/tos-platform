@@ -1,0 +1,246 @@
+<ng-container *ngIf="document$ | async as document">
+  <div class="container-fluid mt-5 pl-5 pr-5 pb-5">
+    <h1>Editor</h1>
+    <div class="row">
+      <div class="col">
+        <mat-card class="editor-card editor-side-card">
+          <mat-card-header class="d-flex justify-content-between align-items-center side-view-header">
+            <mat-card-title class="font-weight-lighter side-view-header-title">Overview</mat-card-title>
+            <mat-form-field appearance="fill" style="border-radius: 30px !important;">
+              <mat-label>Status</mat-label>
+              <mat-select [(value)]="document.status" (selectionChange)="changeStatus($event.value, document)"
+                          panelClass="status-select">
+                <mat-option [value]="status.value"
+                            *ngFor="let status of DocumentStatus | keyvalue">{{ status.value }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-header>
+          <mat-card-content>
+            <h4 class="font-weight-normal">Document Name</h4>
+            <mat-list class="list-group">
+              <mat-list-item>
+                {{document.title}}
+              </mat-list-item>
+            </mat-list>
+
+            <h4 class="font-weight-normal">Collaborators</h4>
+            <mat-list class="list-group">
+              <mat-list-item *ngFor="let collaborator of getCollaborator(document)">
+                {{collaborator}}
+              </mat-list-item>
+            </mat-list>
+
+            <h4 (click)="toggleShowSectionList()" class="font-weight-normal section-list-title">
+              Sections
+              <mat-icon *ngIf="showSectionList">expand_less</mat-icon>
+              <mat-icon *ngIf="!showSectionList">expand_more</mat-icon>
+            </h4>
+            <div [ngStyle]="showSectionList ? {} : {'display': 'none'}">
+              <mat-list class="list-group">
+                <mat-list-item *ngFor="let section of document.sections, let i = index">
+                  <div class="w-100" fxLayout="row" fxLayoutAlign="start start">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                      <mat-icon [ngStyle]="{'color': intToRGB(hashCode(section._id))}">fiber_manual_record</mat-icon>
+                      <p class="section-list-item mb-0" (click)="openSection(section)"
+                         [ngClass]="{'section-list-item-bold': section._id === currentlySelectedSection}"
+                      >
+                        Section
+                      </p>
+                    </div>
+                    <mat-icon class="hover" (click)="openDeleteSectionDialog(document._id, section._id)">delete_outlined</mat-icon>
+                    <mat-icon [ngStyle]="{'color': getLegalityOfSection(section)}">policy</mat-icon>
+                  </div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+
+            <h4 (click)="toggleShowTaskList()" class="font-weight-normal section-list-title">
+              Tasks
+              <mat-icon *ngIf="showTaskList">expand_less</mat-icon>
+              <mat-icon *ngIf="!showTaskList">expand_more</mat-icon>
+            </h4>
+            <div [ngStyle]="showTaskList ? {} : {'display': 'none'}">
+              <mat-list class="list-group">
+                <mat-list-item *ngFor="let task of allTaskForDocument$ | async">
+                  <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon [ngStyle]="{'color': intToRGB(hashCode(task.sectionId || ''))}">fiber_manual_record</mat-icon>
+                    <p class="section-list-item mb-0" (click)="openSectionById(task.sectionId)"
+                       [ngClass]="{'section-list-item-bold': task.sectionId === currentlySelectedSection && currentlySelectedSection !== undefined}"
+                    >
+                      {{task.taskType}} | T{{ task.task_id }} | {{task.taskStatus}}
+                    </p>
+                    <mat-icon class="section-list-item" (click)="openUpdateTask(document, currentlySelectedSection, task)">
+                      launch
+                    </mat-icon>
+                    </div>
+                </mat-list-item>
+              </mat-list>
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions class="side-view-footer">
+            <mat-chip-list aria-label="Fish selection">
+              <mat-chip class="side-view-chip-footer w-100 lower-footer-button"
+                        (click)="openCreateTask(document, currentlySelectedSection)"
+              >+ Create Task</mat-chip>
+              <mat-chip
+                *ngIf="document.status !== DocumentStatus.Done"
+                class="side-view-chip-footer w-100 upper-footer-button hover"
+                (click)="changeStatus('Done', document)"
+              >Mark document as done
+              </mat-chip>
+              <mat-chip
+                *ngIf="document.status === DocumentStatus.Done"
+                (click)="changeStatus('InProgress', document)"
+                class="side-view-chip-footer w-100 upper-footer-button-red hover">Unmark document as done
+              </mat-chip>
+
+            </mat-chip-list>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-xl-7">
+        <mat-card class="editor-card editor-main-card">
+          <mat-card-header class="editor-text-header">
+            <mat-card-title>{{document.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- Document wihtout sections -->
+            <span class="card-text" style="white-space: pre-line"
+                  (mouseup)="openModal()" *ngIf="document.sections.length === 0">{{document.content}}</span>
+            <!-- Document iwht sections -->
+            <ng-container *ngIf="document.sections.length > 0">
+              <ng-container *ngFor="let section of document.sections; let i = index" style="white-space: pre-line">
+              <span *ngIf="i === 0" style="white-space: pre-line"
+                    (mouseup)="openModal()">{{getContent(0, section.from, document)}}</span>
+                <span *ngIf="i > 0" style="white-space: pre-line; line-height: 1.6"
+                      (mouseup)="openModalWithSection(document.sections[i - 1], false, document)">{{getContent(document.sections[i - 1].to, section.from, document)}}</span>
+                <mark class="section-text section-container"
+                      style="white-space: pre-line; cursor: pointer; line-height: 1.6"
+                      (click)="openSection(section)"
+                      [ngStyle]="{'background-color': intToRGB(hashCode(section._id))}"
+                >{{section.content}}</mark>
+              </ng-container>
+              <!-- after sections if there is -->
+              <span *ngIf="document.sections[document.sections.length-1].to !== document.content.length"
+                    (mouseup)="openModalWithSection(document.sections[document.sections.length-1], true, document)"
+                    style="white-space: pre-line; line-height: 1.6">
+              {{getContent(document.sections[document.sections.length - 1].to, document.content.length, document)}}
+            </span>
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col">
+        <mat-card class="editor-card editor-side-card">
+          <mat-card-header class="d-flex justify-content-between align-items-center side-view-header"
+                           *ngIf="currentlySelectedSection && !currentlySelectedAnnotation"
+          >
+            <mat-card-title class="font-weight-lighter side-view-header-title">Section Details</mat-card-title>
+          </mat-card-header>
+          <div fxLayout="row"
+               fxLayoutAlign="space-evenly center"
+               *ngIf="currentlySelectedSection && !currentlySelectedAnnotation"
+               class="mb-3"
+          >
+            <h3 class="mb-0" fxFlex="50">Section</h3>
+            <mat-icon [ngStyle]="{'color': intToRGB(hashCode(getSection(document, currentlySelectedSection)._id))}">fiber_manual_record</mat-icon>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="start start"
+               *ngIf="currentlySelectedSection && currentlySelectedAnnotation"
+          >
+            <div fxLayout="row" fxLayoutAlign="center" class="mb-3">
+              <mat-icon (click)="closeAnnotation()" class="hover">keyboard_backspace</mat-icon>
+              <p class="mb-0">Back</p>
+            </div>
+            <mat-card-title class="font-weight-lighter side-view-header-title mb-3">Annotation Details</mat-card-title>
+          </div>
+          <mat-card-content *ngIf="!currentlySelectedSection">
+            No Section Selected
+          </mat-card-content>
+          <mat-card-content *ngIf="currentlySelectedSection && !currentlySelectedAnnotation">
+            <mat-card class="editor-side-element-card">
+              <h3>
+                Annotations
+              </h3>
+              <mat-card-content *ngIf="user$ | async as user">
+                <!--all legal-->
+                <tos-annotation-card
+                  *ngFor="let annotation of getSection(document, currentlySelectedSection).legalAssessments"
+                  [legalAssessment]="annotation"
+                  [section]="getSection(document, currentlySelectedSection)"
+                  [user]="user"
+                  (openLegal)="openAnnotationLegal($event)"
+                  (reload)="reloadData()"
+                >
+                </tos-annotation-card>
+                <!--all topics-->
+                <tos-annotation-card
+                  *ngFor="let annotation of getSection(document, currentlySelectedSection).topicLabels"
+                  [topicLabel]="annotation"
+                  [section]="getSection(document, currentlySelectedSection)"
+                  [user]="user"
+                  (openTopic)="openAnnotationTopic($event)"
+                  (reload)="reloadData()"
+                >
+                </tos-annotation-card>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+          <mat-card-content *ngIf="currentlySelectedSection && currentlySelectedAnnotation">
+            <div fxLayout="column" class="mb-3">
+              <div fxLayout="row"
+                   fxLayoutAlign="space-between center"
+                   *ngIf="isCurrentlySelectedAnnotationTopicLabel">
+                <h3 class="mb-0" fxFlex="50">Topic Label</h3>
+                <p class="mb-0">{{getAnnotationLabelOrLegal(document, currentlySelectedAnnotation)}}</p>
+              </div>
+              <div fxLayout="row"
+                   fxLayoutAlign="space-between center"
+                   *ngIf="!isCurrentlySelectedAnnotationTopicLabel">
+                <h3 class="mb-0" fxFlex="50">Legal Assessment</h3>
+                <p class="mb-0">{{getAnnotationLabelOrLegal(document, currentlySelectedAnnotation)}}</p>
+              </div>
+              <div fxLayout="row"
+                   fxLayoutAlign="space-between center">
+                <h3 class="mb-0">Reviewer</h3>
+                <p class="mb-0">
+                  {{getAnnotation(document, currentlySelectedAnnotation).createdBy.firstName}}
+                  {{getAnnotation(document, currentlySelectedAnnotation).createdBy.lastName}}
+                </p>
+              </div>
+            </div>
+            <mat-card class="editor-side-card-in-card">
+              <h3>Comments</h3>
+              <mat-card-content *ngIf="user$ | async as user">
+                <tos-comment-card
+                  *ngFor="let comment of getAnnotation(document, currentlySelectedAnnotation).comments"
+                  [comment]="comment"
+                  (reload)="reloadData()"
+                  [user]="user"
+                  [isTopicLabel]="isCurrentlySelectedAnnotationTopicLabel"
+                  [annotationId]="currentlySelectedAnnotation"
+                ></tos-comment-card>
+
+              </mat-card-content>
+              <mat-card-actions>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput placeholder="Write comment here..." class="comment-container"
+                         [formControl]="comment"/>
+                  <mat-icon matSuffix (click)="createComment()" class="comment-button">arrow_right_alt</mat-icon>
+                </mat-form-field>
+              </mat-card-actions>
+            </mat-card>
+          </mat-card-content>
+          <mat-card-actions class="side-view-footer">
+            <mat-chip-list>
+              <mat-chip class="side-view-chip-footer w-100 upper-footer-button hover"
+                        (click)="openAnnotationDialog(document)">+ Create Annotation
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</ng-container>

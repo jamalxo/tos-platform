@@ -1,0 +1,22 @@
+.annotation-card {
+  cursor: pointer;
+  background-color: var(--primary-blue);
+  color: var(--white);
+}
+
+.annotation-card-content {
+  text-align: center;
+}
+
+.annotation-card-icon {
+  width: 200px;
+  height: 100px;
+  font-size: 112px;
+}
+
+.form-field-label {
+  font-weight: lighter;
+  margin-bottom: 0;
+  text-align: center;
+
+}

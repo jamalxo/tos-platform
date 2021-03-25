@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-title class="upload-mat-card-title">
+      Import your file
+    </mat-card-title>
+    <mat-card-subtitle class="upload-mat-card-subtitle">
+      Uploaded files should be .pdf
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-grid-list [cols]="colNum()" rowHeight="2:1">
+        <mat-grid-tile *ngIf="!copyPasteOpen">
+        <mat-card class="upload-wrapper">
+            <mat-card-content>
+                <mat-icon class="pointer" (click)="deleteFile(0)" *ngIf="gotFile">close</mat-icon>
+                <div class="upload-container">
+                  <img class="upload-folder-icon" src="../../assets/icons/folder_icon.png">
+                  <div *ngIf="!gotFile"  appDnd (fileDropped)="onFileDropped($event)">
+                    <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target)"/>
+                    <h3>Drag and drop file here or <label for="fileDropRef">browse</label></h3>
+                  </div>
+                </div>
+                <div class="files-list" *ngIf="gotFile" >
+                  <div class="single-file" *ngFor="let file of files; let i = index">
+                    <div class="info">
+                      <h4 class="name">
+                        Preparing {{ file?.name }}
+                      </h4>
+                    </div>
+                    <file-progress [progress]="file?.progress"></file-progress>
+                    <div class="file-actions">
+                      <button mat-flat-button color="action" (click)="deleteFile(i)">
+                        Cancel
+                      </button>
+                      <button *ngIf="file?.progress == 100" mat-flat-button color="action" (click)="uploadFile(i)">
+                        Upload
+                      </button>
+                    </div>
+                  </div>
+                </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="!gotFile">
+          <mat-card class="copy-paste-wrapper">
+            <mat-card-content>
+              <div class="copy-paste-closer">
+                <mat-icon class="copy-paste-closer pointer" (click)="closeCopyPaste()" *ngIf="copyPasteOpen">close</mat-icon>
+              </div>
+              <div>
+                <div *ngIf="!copyPasteOpen" class="copy-paste-text">
+                  <p>You can paste a text by</p>
+                  <p>clicking <label class="pointer" (click)="openCopyPaste()">here</label></p>
+                </div>
+
+                <form *ngIf="copyPasteOpen" [formGroup]="uploadForm" class="is-valid" novalidate>
+                  <div class="form-group">
+                    <label>{{ 'upload.title' | translate }}</label>
+                    <input type="text" class="form-control" placeholder="Title" formControlName="title" required>
+                  </div>
+                  <div class="form-group">
+                    <label>{{ 'upload.content' | translate }}</label>
+                    <textarea class="form-control" placeholder="Content" formControlName="content"></textarea>
+                  </div>
+                  <div class="form-group text-center">
+                    <button type="button" class="btn btn-primary"
+                            (click)="upload()">{{ 'upload.upload' | translate }}</button>
+                  </div>
+                </form>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>

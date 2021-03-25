@@ -1,0 +1,78 @@
+.list-container {
+  margin-top: 15px;
+  color: var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+}
+
+.list-header {
+  display: flex;
+  column-gap: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.list-title-button {
+  background: transparent;
+  cursor: unset;
+  pointer-events: none;
+  font-size: 45px;
+}
+
+.list-filters {
+  display: flex;
+}
+
+.list-filter-title-button {
+  background: transparent;
+  cursor: unset;
+  pointer-events: none;
+}
+
+.list-filter-button-list {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  column-gap: 15px;
+  margin-left: 15px;
+  border-top: 1px solid black;
+}
+
+.list-filter-input-field {
+  flex-grow: 1;
+}
+
+.list-filter-input {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.list-filter-button {
+  background-color: transparent;
+  color: var(--primary-blue);
+  border: solid 1px #24364C;
+}
+
+.active-list-filter-button {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.list-table {
+  background: var(--primary-grey);
+}
+
+.list-table .mat-header-cell {
+  color: var(--primary-blue);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.list-table .uploader-icon {
+  background: var(--primary-grey);
+}
+
+.list__actions mat-icon {
+  cursor: pointer;
+}

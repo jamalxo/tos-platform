@@ -1,0 +1,29 @@
+<div class="card-container" *ngIf="comment">
+  <mat-card class="annotation-card">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <h4 class="font-weight-light mb-1" >
+          {{comment.createdBy.firstName}} {{comment.createdBy.lastName}}
+        </h4>
+<!--        <mat-icon class="dot">fiber_manual_record</mat-icon>-->
+<!--        {{formatDate(comment.createdAt)}}-->
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon *ngIf="comment.createdBy._id === user._id" class="icon hover" (click)="deleteComment()">delete</mat-icon>
+        <mat-icon *ngIf="!editMode && comment.createdBy._id === user._id" class="icon hover" (click)="changeEdit()">edit</mat-icon>
+        <mat-icon *ngIf="editMode" class="icon hover" (click)="editComment()">done</mat-icon>
+        <div class="mr-1 text-center">{{amountOfUpvotes()}}</div>
+        <mat-icon class="icon hover" [ngClass]="isUpvotedByMe() ? 'highlight' : ''"
+                  (click)="upvoteOrUndoUpvote()"
+        >thumb_up</mat-icon>
+      </div>
+    </div>
+    <mat-card-content>
+      <p *ngIf="!editMode"> {{comment.content}} </p>
+      <mat-form-field *ngIf="editMode" appearance="outline" class="w-100" color="primary">
+        <input matInput class="comment-container"
+               [formControl]="commentForm"/>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</div>

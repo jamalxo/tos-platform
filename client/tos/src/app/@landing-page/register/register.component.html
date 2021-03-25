@@ -1,0 +1,55 @@
+<div class="leftOuterDiv">
+  <div class="leftInnerDiv">
+    <h2 class="text-center"><span class="CoText">Co</span><span class="nnotateText">nnotate</span></h2>
+    <p class="text-center infoText">{{ 'landing-page.infoText' | translate }}</p>
+    <img src="https://i.imgur.com/6S4JHbk.png" style= "width:100%;"/>
+    <!--<img style= "max-height:calc(100%/3); max-width: auto; position: relative;"" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2c25c85c-81b8-4550-92ea-6baf64998ca9/Screenshot_2021-01-06_at_16.38.00.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210107%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210107T120151Z&X-Amz-Expires=86400&X-Amz-Signature=fff5e7927fee5ec68ce6d257679c2de6f2ad0347fc66a059ff97f79bc21283d6&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Screenshot_2021-01-06_at_16.38.00.png%22">-->
+  </div>
+</div>
+
+<div class="rightOuterDiv">
+  <div class="rightInnerDiv">
+    <h1 class="text-center signupHeading">{{ 'landing-page.signUp' | translate }}</h1><p></p>
+
+    <form [formGroup]="registerForm" class="is-valid" novalidate>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field class="seperatedFieldLeft" appearance="outline">
+          <mat-label>{{ 'landing-page.firstName' | translate }}</mat-label>
+          <input matInput formControlName="firstName" required (keyup.enter)="onSubmit()" >
+          <mat-error *ngIf="f.firstName.hasError('required')">{{ 'landing-page.firstNameError' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="seperatedFieldRight" appearance="outline">
+          <mat-label>{{ 'landing-page.lastName' | translate }}</mat-label>
+          <input matInput formControlName="lastName" required (keyup.enter)="onSubmit()" >
+          <mat-error *ngIf="f.lastName.hasError('required')">{{ 'landing-page.lastNameError' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field class="emailField" appearance="outline">
+          <mat-label>{{ 'landing-page.email' | translate }}</mat-label>
+          <input matInput formControlName="email" required (keyup.enter)="onSubmit()" >
+          <mat-error *ngIf="f.email.hasError('email')">{{ 'landing-page.emailError' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field class="seperatedFieldLeft" appearance="outline">
+          <mat-label>{{ 'landing-page.password' | translate }}</mat-label>
+          <input type="password" matInput formControlName="password" required (keyup.enter)="onSubmit()" >
+          <mat-error *ngIf="f.password.hasError('required')">{{ 'landing-page.passwordError' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="seperatedFieldRight" appearance="outline">
+          <mat-label>{{ 'landing-page.confirm' | translate }}</mat-label>
+          <input type="password" matInput formControlName="passwordConfirm" required (keyup.enter)="onSubmit()" >
+          <mat-error *ngIf="f.passwordConfirm.hasError('required')">{{ 'landing-page.passwordError' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+      <mat-error *ngIf="error">Please check your inputs</mat-error>
+      <div class="form-group text-center">
+        <button type="button" class="btn btn-primary loginButton" (click)="onSubmit()">{{ 'landing-page.createAccount' | translate }}</button>
+      </div>
+      <p class="text-center alreadyregisteredText">{{ 'landing-page.alreadyRegistered' | translate }}
+        <a class="text-center signinText" href="../login">{{ 'landing-page.signIn' | translate }}</a>
+      </p>
+    </form>
+  </div>
+</div>
