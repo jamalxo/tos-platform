@@ -12,8 +12,6 @@
 </table>
 
 # Features
-- Login/Register
-- Homepage
 - Editor
     - Upload documents (pdf or text)
     - Create sections in documents
@@ -49,10 +47,10 @@ npm install
 node index.js
 
 # Database
-runs on a cloud, no configuration needed
+created over mongo cloud
 
 # Database Content
-download Mongo Compass and connect to mongodb+srv://admin:tos123@tos-db.e9p2p.mongodb.net/test
+download Mongo Compass and connect to your mongo cloud url
 
 ### Disclaimer
 All icons that have been used are from icons8.com or flaticon.com and may be subject to copyright.
